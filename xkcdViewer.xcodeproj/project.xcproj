@@ -11,20 +11,20 @@
     ],
   },
   "files": [
-    { "kind": "folder", "path": "XKCDViewer", "target-membership": [ "XKCDViewer" ] },
+    { "kind": "folder", "path": "xkcdViewer", "target-membership": [ "xkcdViewer" ] },
     {
       "kind": "group",
       "name": "Products",
       "children": [
-        { "path": "<PRODUCTS>/XKCDViewer.app", "id": "9D21BD2930AFAEAE00A74F8D", "type": "wrapper.application", "index": false },
+        { "path": "<PRODUCTS>/xkcdViewer.app", "id": "9D21BD2930AFAEAE00A74F8D", "type": "wrapper.application", "index": false },
       ],
     },
   ],
   "targets": [
     {
-      "name": "XKCDViewer",
+      "name": "xkcdViewer",
       "id": "9D21BD2830AFAEAE00A74F8D",
-      "product": "Products/XKCDViewer.app",
+      "product": "Products/xkcdViewer.app",
       "product-type": "application",
       "build-phases": [
         "compile-sources",

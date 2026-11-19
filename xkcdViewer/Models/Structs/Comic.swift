@@ -1,6 +1,6 @@
 //
 //  Comic.swift
-//  XKCDReader
+//  xkcdViewer
 //
 //  Created by Aram Soneson on 11/18/26.
 //

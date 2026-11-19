@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  XKCDViewer
+//  xkcdViewer
 //
 //  Created by Aram Soneson on 11/19/26.
 //

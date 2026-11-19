@@ -1,0 +1,37 @@
+{
+  "fill" : "system-light",
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "fill" : "system-dark",
+          "glass" : true,
+          "image-name" : "text.svg",
+          "name" : "text"
+        }
+      ],
+      "position" : {
+        "scale" : 0.575,
+        "translation-in-points" : [
+          5,
+          -15
+        ]
+      },
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "specular" : true,
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.15
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

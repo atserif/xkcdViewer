@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Comic: Codable {
+struct Comic: Equatable, Codable {
 	let num: Int
 	let title: String
 	let alt: String

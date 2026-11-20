@@ -64,7 +64,6 @@ struct ContentView: View {
 						.contentTransition(.numericText(value: Double(loadedComicNumber)))
 						.animation(.default, value: loadedComicNumber)
 				}
-				.controlSize(.extraLarge)
 				.padding(.horizontal, 20)
 			}
 		}
@@ -73,6 +72,9 @@ struct ContentView: View {
 			hasLaunched = true
 			
 			loadComics()
+		}
+		.onChange(of: comics) {
+			saveComics()
 		}
 		.task {
 			do {
@@ -101,6 +103,11 @@ struct ContentView: View {
 	private func loadComics() {
 		if let decoded = try? JSONDecoder().decode([Comic].self, from: comicsData) {
 			comics = decoded
+		}
+	}
+	private func saveComics() {
+		if let encoded = try? JSONEncoder().encode(comics) {
+			comicsData = encoded
 		}
 	}
 }

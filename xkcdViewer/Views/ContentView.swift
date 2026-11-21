@@ -13,7 +13,7 @@ struct ContentView: View {
 	@State private var comics: [Comic] = []
 	@State private var latestComic: Comic?
 	
-	func fetchComic(_ num: Int? = nil) async throws -> Comic {
+	private func fetchComic(_ num: Int? = nil) async throws -> Comic {
 		let urlString: String
 		
 		if let num {
@@ -90,6 +90,7 @@ struct ContentView: View {
 					}
 				}
 				
+				// Append previously fetched latest comic to the array
 				if comics.last?.num != latest.num {
 					comics.append(latest)
 					// Save comics on change of comics array

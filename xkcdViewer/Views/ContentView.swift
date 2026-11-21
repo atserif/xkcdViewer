@@ -44,18 +44,18 @@ struct ContentView: View {
     var body: some View {
 		NavigationStack {
 			if let latestComic {
-				if comics.count >= latestComic.num {
+				if comics.last?.num == latestComic.num {
 					
 				} else {
-					ProgressView(value: Double(comics.count) / Double(latestComic.num)) {
+					ProgressView(value: Double(comics.last?.num ?? 0), total: Double(latestComic.num)) {
 						Text("Fetching comics...")
 					} currentValueLabel: {
-						Text(Double(comics.count) / Double(latestComic.num), format: .percent.precision(.fractionLength(1)))
+						Text(Double(comics.last?.num ?? 0) / Double(latestComic.num), format: .percent.precision(.fractionLength(1)))
 							.monospacedDigit()
-							.contentTransition(.numericText(value: Double(comics.count)))
-							.animation(.default, value: comics.count)
+							.contentTransition(.numericText(value: Double(comics.last?.num ?? 0)))
+							.animation(.default, value: comics.last?.num)
 					}
-					.padding(.horizontal, 20)
+					.padding()
 				}
 			}
 		}

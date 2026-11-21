@@ -9,19 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
 	@AppStorage("comicsData") private var comicsData: Data = Data()
-	@AppStorage("latestComicNumber") private var latestComicNumber: Int = 1
-	
-	@State private var hasLaunched: Bool = false
 	
 	@State private var comics: [Comic] = []
-	
-	private var loadedComicNumber: Int {
-		if comics.count < 404 {
-			comics.count
-		} else {
-			comics.count + 1
-		}
-	}
+	@State private var latestComic: Comic?
 	
 	func fetchComic(_ num: Int? = nil) async throws -> Comic {
 		let urlString: String
@@ -53,50 +43,63 @@ struct ContentView: View {
 	
     var body: some View {
 		NavigationStack {
-			if loadedComicNumber == latestComicNumber {
-				
-			} else {
-				ProgressView(value: Double(loadedComicNumber) / Double(latestComicNumber)) {
-					Text("Fetching comics...")
-				} currentValueLabel: {
-					Text(Double(loadedComicNumber) / Double(latestComicNumber), format: .percent.precision(.fractionLength(1)))
-						.monospacedDigit()
-						.contentTransition(.numericText(value: Double(loadedComicNumber)))
-						.animation(.default, value: loadedComicNumber)
+			if let latestComic {
+				if comics.count >= latestComic.num {
+					
+				} else {
+					ProgressView(value: Double(comics.count) / Double(latestComic.num)) {
+						Text("Fetching comics...")
+					} currentValueLabel: {
+						Text(Double(comics.count) / Double(latestComic.num), format: .percent.precision(.fractionLength(1)))
+							.monospacedDigit()
+							.contentTransition(.numericText(value: Double(comics.count)))
+							.animation(.default, value: comics.count)
+					}
+					.padding(.horizontal, 20)
 				}
-				.padding(.horizontal, 20)
 			}
 		}
-		.onAppear {
-			guard !hasLaunched else { return }
-			hasLaunched = true
-			
-			loadComics()
-		}
-		.onChange(of: comics) {
-			saveComics()
-		}
 		.task {
+			loadComics()
+			
 			do {
-				if latestComicNumber == 1 {
-					try await comics.append(fetchComic())
-					latestComicNumber = comics[0].num
-				}
+				// Defines the latest comic as a non-optional type so it can be easily called later on
+				let latest = try await fetchComic()
+				latestComic = latest
 				
-				for comicNumber in loadedComicNumber..<latestComicNumber {
-					do {
-						try await comics.append(fetchComic(comicNumber))
-					} catch {
-						print("Failed to fetch comic #\(comicNumber): \(error)")
+				// Checks if there are more comics to fetch
+				// If the last comic number in the array is less than the latest comic number in the API, fetching is incomplete
+				// The check for the last comic number has a fallback of 0 because if there are no items in the array and thus no last item, fetching is clearly incomplete
+				if (comics.last?.num ?? 0) < latest.num {
+					// Adds 1 to refer to the next comic that needs to be fetched
+					// Doesn't include the latest comic number in the API because that has already been fetched and will be appended to the array later
+					for comicNumber in (comics.last?.num ?? 0) + 1..<latest.num {
+						do {
+							try Task.checkCancellation()
+							
+							comics.append(try await fetchComic(comicNumber))
+							// Save comics on change of comics array
+							saveComics()
+						} catch is CancellationError {
+							return
+						} catch {
+							print("Failed to fetch comic #\(comicNumber): \(error)")
+						}
+						
+						print(comicNumber)
 					}
 				}
 				
-				print(comics)
+				if comics.last?.num != latest.num {
+					comics.append(latest)
+					// Save comics on change of comics array
+					saveComics()
+				}
+			} catch is CancellationError {
+				return
 			} catch {
 				print(error)
 			}
-			
-			comics.sort { $0.num < $1.num }
 		}
     }
 	

@@ -17,23 +17,21 @@
               "value" : "system-light"
             }
           ],
-          "glass" : true,
-          "image-name" : "text.svg",
-          "name" : "text"
+          "image-name" : "wordmark.svg",
+          "name" : "wordmark"
         }
       ],
       "position" : {
-        "scale" : 0.575,
+        "scale" : 4.12,
         "translation-in-points" : [
-          5,
-          -15
+          0,
+          0
         ]
       },
       "shadow" : {
         "kind" : "neutral",
-        "opacity" : 0.5
+        "opacity" : 0.6
       },
-      "specular" : true,
       "translucency" : {
         "enabled" : true,
         "value" : 0.15

@@ -11,20 +11,20 @@
     ],
   },
   "files": [
-    { "kind": "folder", "path": "xkcdViewer", "target-membership": [ "xkcdViewer" ] },
+    { "kind": "folder", "path": "XKCDViewer", "target-membership": [ "XKCDViewer" ] },
     {
       "kind": "group",
       "name": "Products",
       "children": [
-        { "path": "<PRODUCTS>/xkcdViewer.app", "id": "9D21BD2930AFAEAE00A74F8D", "type": "wrapper.application", "index": false },
+        { "path": "<PRODUCTS>/XKCDViewer.app", "id": "9D21BD2930AFAEAE00A74F8D", "type": "wrapper.application", "index": false },
       ],
     },
   ],
   "targets": [
     {
-      "name": "xkcdViewer",
+      "name": "XKCDViewer",
       "id": "9D21BD2830AFAEAE00A74F8D",
-      "product": "Products/xkcdViewer.app",
+      "product": "Products/XKCDViewer.app",
       "product-type": "application",
       "build-phases": [
         "compile-sources",
@@ -39,7 +39,7 @@
         "DEVELOPMENT_TEAM": "9G2CPZFW9Q",
         "ENABLE_PREVIEWS": "YES",
         "GENERATE_INFOPLIST_FILE": "YES",
-        "INFOPLIST_KEY_CFBundleDisplayName": "xkcd",
+        "INFOPLIST_KEY_CFBundleDisplayName": "XKCD",
         "INFOPLIST_KEY_LSApplicationCategoryType": "public.app-category.reference",
         "INFOPLIST_KEY_UIApplicationSceneManifest_Generation": "YES",
         "INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents": "YES",
@@ -52,7 +52,7 @@
           "@executable_path/Frameworks",
         ],
         "MARKETING_VERSION": "1.0",
-        "PRODUCT_BUNDLE_IDENTIFIER": "com.aramsoneson.xkcdViewer",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.aramsoneson.XKCDViewer",
         "PRODUCT_NAME": "$(TARGET_NAME)",
         "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
         "SUPPORTED_PLATFORMS": "iphoneos iphonesimulator",
@@ -63,7 +63,7 @@
         "SWIFT_DEFAULT_ACTOR_ISOLATION": "MainActor",
         "SWIFT_EMIT_LOC_STRINGS": "YES",
         "SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY": "YES",
-        "SWIFT_VERSION": "5.0",
+        "SWIFT_VERSION": "6.0",
         "TARGETED_DEVICE_FAMILY": "1",
       },
     },

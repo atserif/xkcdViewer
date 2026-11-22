@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  xkcdViewer
+//  XKCDViewer
 //
 //  Created by Aram Soneson on 11/19/26.
 //
@@ -77,7 +77,8 @@ struct ContentView: View {
 						do {
 							try Task.checkCancellation()
 							
-							comics.append(try await fetchComic(comicNumber))
+							let comic = try await fetchComic(comicNumber)
+							comics.append(comic)
 							// Save comics on change of comics array
 							saveComics()
 						} catch is CancellationError {
@@ -85,8 +86,6 @@ struct ContentView: View {
 						} catch {
 							print("Failed to fetch comic #\(comicNumber): \(error)")
 						}
-						
-						print(comicNumber)
 					}
 				}
 				
